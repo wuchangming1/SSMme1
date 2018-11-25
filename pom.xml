@@ -27,6 +27,7 @@
       <groupId>com.github.pagehelper</groupId>
       <artifactId>pagehelper</artifactId>
       <version>5.0.0</version>
+      <scope>compile</scope>
     </dependency>
 
     <!-- MBG -->
