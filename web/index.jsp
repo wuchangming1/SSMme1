@@ -7,12 +7,12 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--<jsp:forward page="/emps"></jsp:forward>--%>
-<jsp:forward page = "/WEB-INF/views/list.jsp" />
+<jsp:forward page = "/emps" />
 <html>
 <head>
     <title>aaaaaaa啊啊啊啊啊啊啊啊啊啊啊啊啊</title>
 </head>
 <body>
-
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 </body>
 </html>
