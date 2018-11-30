@@ -43,36 +43,55 @@
                     <th>部门</th>
                     <th>操作</th>
                 </tr>
-                <tr>
-                    <th>1</th>
-                    <th>维他命</th>
-                    <th>男</th>
-                    <th>231354@qq.com</th>
-                    <th>系统软件室</th>
-                    <th>
-                        <button class="btn btn-primary">
-                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                            编辑
-                        </button>
-                        <button class="btn btn-danger">
-                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                            删除
-                        </button>
-                    </th>
-                </tr>
-                <c:forEach items="${pageInfo.emps}" var="emp">
+                <%--<tr>--%>
+                    <%--<th>1</th>--%>
+                    <%--<th>维他命</th>--%>
+                    <%--<th>男</th>--%>
+                    <%--<th>231354@qq.com</th>--%>
+                    <%--<th>系统软件室</th>--%>
+                    <%--<th>--%>
+                        <%--<button class="btn btn-primary">--%>
+                            <%--<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>--%>
+                            <%--编辑--%>
+                        <%--</button>--%>
+                        <%--<button class="btn btn-danger">--%>
+                            <%--<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>--%>
+                            <%--删除--%>
+                        <%--</button>--%>
+                    <%--</th>--%>
+                <%--</tr>--%>
+                <%--<c:forEach items="${pageInfo.emps}" var="emp">--%>
+                    <%--<tr>--%>
+                        <%--<th>${emp.empId}</th>--%>
+                        <%--<th>${emp.empName}</th>--%>
+                        <%--<th>${emp.gender=="M"?"男":"女"}</th>--%>
+                        <%--<th>${emp.email}</th>--%>
+                        <%--<th>${emp.department.deptName}</th>--%>
+                        <%--<th>--%>
+                            <%--<button class="btn btn-primary">--%>
+                                <%--<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>--%>
+                                <%--编辑--%>
+                            <%--</button>--%>
+                            <%--<button class="btn btn-danger">--%>
+                                <%--<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>--%>
+                                <%--删除--%>
+                            <%--</button>--%>
+                        <%--</th>--%>
+                    <%--</tr>--%>
+                <%--</c:forEach>--%>
+                <c:forEach items="${pageInfo.list }" var="emp">
                     <tr>
-                        <th>${emp.empId}</th>
-                        <th>${emp.empName}</th>
-                        <th>${emp.gender=="M"?"男":"女"}</th>
-                        <th>${emp.email}</th>
-                        <th>${emp.department.deptName}</th>
+                        <th>${emp.empId }</th>
+                        <th>${emp.empName }</th>
+                        <th>${emp.gender=="M"?"男":"女" }</th>
+                        <th>${emp.email }</th>
+                        <th>${emp.department.deptName }</th>
                         <th>
-                            <button class="btn btn-primary">
+                            <button class="btn btn-primary btn-sm">
                                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                 编辑
                             </button>
-                            <button class="btn btn-danger">
+                            <button class="btn btn-danger btn-sm">
                                 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                 删除
                             </button>
@@ -84,28 +103,44 @@
     <%--分页信息--%>
         <div class="row">
             <div class="col-md-6">
-                当前页数为
+                当前页数为${pageInfo.pageNum},总页数为${pageInfo.pages}
             </div>
             <div class="col-md-6">
                 <nav aria-label="Page navigation">
                     <ul class="pagination">
-                        <li><a href="#">首页</a></li>
-                        <li>
-                            <a href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li>
-                            <a href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                        <li><a href="#">末页</a></li>
+                        <li><a href="${APP_PATH}/emps?pn=1">首页</a></li>
+                        <c:if test="${pageInfo.pageNum != 1}">
+                            <li>
+                                <a href="${APP_PATH}/emps?pn=${pageInfo.pageNum-1}" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                        </c:if>
+
+                        <c:forEach items="${pageInfo.navigatepageNums}" var="page_Num">
+                            <c:if test="${page_Num == pageInfo.pageNum}">
+                                <li class="active">
+                                    <a href="${APP_PATH}/emps?pn=${page_Num}">${page_Num}</a>
+                                </li>
+                            </c:if>
+                            <c:if test="${page_Num != pageInfo.pageNum}">
+                                <li>
+                                    <a href="${APP_PATH}/emps?pn=${page_Num}">${page_Num}</a>
+                                </li>
+                            </c:if>
+
+                        </c:forEach>
+                        
+                        
+                        <c:if test="${pageInfo.pageNum != pageInfo.pages}">
+                            <li>
+                                <a href="${APP_PATH}/emps?pn=${pageInfo.pageNum+1}" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </c:if>
+
+                        <li><a href="${APP_PATH}/emps?pn=${pageInfo.pages}">末页</a></li>
                     </ul>
                 </nav>
             </div>
