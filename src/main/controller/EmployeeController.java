@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -18,6 +19,17 @@ public class EmployeeController {
     @Autowired
     EmployeeService employeeService;
     @RequestMapping("/emps")
+    @ResponseBody
+    public PageInfo getEmpsInfoWithJson(@RequestParam(value = "pn",defaultValue = "1")Integer pn){
+        PageHelper.startPage(pn,5);
+        List<Employee> emps = employeeService.getAll();
+
+        PageInfo pageInfo = new PageInfo(emps,5);
+//        model.addAttribute("pageInfo",pageInfo);
+        return pageInfo;
+    }
+
+//    @RequestMapping("/emps")
     public String getEmps(@RequestParam(value = "pn",defaultValue = "1")Integer pn, Model model){
         PageHelper.startPage(pn,5);
         List<Employee> emps = employeeService.getAll();
