@@ -3,6 +3,7 @@ package main.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import main.entity.Employee;
+import main.entity.Msg;
 import main.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,13 +21,13 @@ public class EmployeeController {
     EmployeeService employeeService;
     @RequestMapping("/emps")
     @ResponseBody
-    public PageInfo getEmpsInfoWithJson(@RequestParam(value = "pn",defaultValue = "1")Integer pn){
+    public Msg getEmpsInfoWithJson(@RequestParam(value = "pn",defaultValue = "1")Integer pn){
         PageHelper.startPage(pn,5);
         List<Employee> emps = employeeService.getAll();
 
         PageInfo pageInfo = new PageInfo(emps,5);
 //        model.addAttribute("pageInfo",pageInfo);
-        return pageInfo;
+        return Msg.success().add("pageInfo",pageInfo);
     }
 
 //    @RequestMapping("/emps")
